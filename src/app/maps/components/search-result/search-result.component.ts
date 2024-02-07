@@ -29,6 +29,7 @@ export class SearchResultComponent {
 
   getDirection(place: Feature) {
     if (!this.placesService.useLocation) throw Error("No use location");
+    this.placesService.deletePlace();
     const start = this.placesService.useLocation;
     const end = place.center as [number, number];
     this.mapService.getRouteBetweenPoints(start, end);
