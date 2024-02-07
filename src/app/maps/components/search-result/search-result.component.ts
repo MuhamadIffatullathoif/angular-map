@@ -9,6 +9,7 @@ import {Feature} from "../../interfaces/places";
 })
 export class SearchResultComponent {
   public selectedId: string = '';
+
   constructor(private placesService: PlacesService, private mapService: MapService) {
   }
 
@@ -24,5 +25,12 @@ export class SearchResultComponent {
     this.selectedId = place.id;
     const [lng, lat] = place.center;
     this.mapService.flyTo([lng, lat]);
+  }
+
+  getDirection(place: Feature) {
+    if (!this.placesService.useLocation) throw Error("No use location");
+    const start = this.placesService.useLocation;
+    const end = place.center as [number, number];
+    this.mapService.getRouteBetweenPoints(start, end);
   }
 }
