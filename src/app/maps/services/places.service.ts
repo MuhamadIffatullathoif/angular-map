@@ -35,6 +35,11 @@ export class PlacesService {
   }
 
   getPlaceByQuery(query: string = '') {
+    if (query.length === 0) {
+      this.places = [];
+      this.isLoadingPlaces = false;
+      return;
+    }
     if (!this.useLocation) throw Error('No use location');
     this.isLoadingPlaces = true;
     this.placesApi.get<PlacesResponse>(`/${query}.json`, {
