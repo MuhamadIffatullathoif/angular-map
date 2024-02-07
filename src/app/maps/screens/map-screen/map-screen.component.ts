@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {PlacesService} from "../../services";
 
 @Component({
@@ -8,5 +8,9 @@ import {PlacesService} from "../../services";
 })
 export class MapScreenComponent {
   constructor(private placesService: PlacesService) {
+  }
+
+  get isUserLocationReady(): boolean {
+    return this.placesService.isUserLocationReady;
   }
 }
